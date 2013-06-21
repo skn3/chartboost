@@ -3,26 +3,30 @@ Strict
 Import mojo
 Import wrapper
 
+'these are demo identities
+#If TARGET = "ios"
+	Const APP_ID:= "4f21c409cd1cb2fb7000001b"
+	Const APP_SIGNATURE:= "92e2de2fd7070327bdeb54c15a5295309c6fcd2d"
+#Elseif TARGET = "android"
+	Const APP_ID:= "4f7b433509b6025804000002"
+	Const APP_SIGNATURE:= "dd2d41b69ac01b80f443f5b6cf06096d457f82bd"
+#else
+	Const APP_ID:= "FAKE_APP_ID"
+	Const APP_SIGNATURE:= "FAKE_APP_SIGNATURE"
+#end
+
 'main program init
 Function Main:Int()
+	'we should start the chartboost session in main ALWAYS!
+	'it is also fine to place this in your apps New constructor
+	'(see below)
 	New MyApp
+	
 	Return 0
 End
 
 'demo app
 Class MyApp Extends App Implements ChartboostDelegate
-	'these are demo identities
-	#If TARGET = "ios"
-		Const APP_ID:= "4f21c409cd1cb2fb7000001b"
-		Const APP_SIGNATURE:= "92e2de2fd7070327bdeb54c15a5295309c6fcd2d"
-	#Elseif TARGET = "android"
-		Const APP_ID:= "4f7b433509b6025804000002"
-		Const APP_SIGNATURE:= "dd2d41b69ac01b80f443f5b6cf06096d457f82bd"
-	#else
-		Const APP_ID:= "FAKE_APP_ID"
-		Const APP_SIGNATURE:= "FAKE_APP_SIGNATURE"
-	#end
-	
 	Field wrapper:= New ChartboostWrapper
 	
 	'constructor/destructor
@@ -36,7 +40,9 @@ Class MyApp Extends App Implements ChartboostDelegate
 	Method OnCreate:Int()
 		' --- setup app ---
 		SetUpdateRate(60)
-				
+		
+		wrapper.CacheAdvert()
+		
 		'return nothing
 		Return 0
 	End

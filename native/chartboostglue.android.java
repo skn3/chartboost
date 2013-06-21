@@ -92,16 +92,12 @@ class ChartboostGlue {
 		//store global pointer to glue instance
 		this.instance = this;
 	
-		//get shared chartboost object
-		this.cb = Chartboost.sharedChartboost();
-		
 		//setup chartboost
 		ChartboostGlue.instance.appId = appId;
 		ChartboostGlue.instance.appSignature = appSignature;
-		
-		//finalise setup
-		this.cb.onCreate(BBAndroidGame.AndroidGame().GetActivity(),ChartboostGlue.instance.appId,ChartboostGlue.instance.appSignature,ChartboostGlue.instance.chartboostDelegateGlue);
-		this.cb.startSession();
+		ChartboostGlue.instance.cb = Chartboost.sharedChartboost();
+		ChartboostGlue.instance.cb.onCreate(BBAndroidGame.AndroidGame().GetActivity(),ChartboostGlue.instance.appId,ChartboostGlue.instance.appSignature,ChartboostGlue.instance.chartboostDelegateGlue);
+		ChartboostGlue.instance.cb.startSession();
 	}
 
 	public void CacheInterstitial() {

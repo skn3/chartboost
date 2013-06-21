@@ -7,6 +7,9 @@
 
 Strict
 
+'version 5
+' - tweaked android implementation
+' - updated examples
 'version 4
 ' - updated to version 3.1.5 of chartboost lib for android
 ' - updated to version 3.2 for ios

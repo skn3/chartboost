@@ -5,7 +5,9 @@ Import chartboost
 
 'main program init
 Function Main:Int()
-	'create the app and set chartboost delegate
+	'we should start the chartboost session in main ALWAYS!
+	'it is also fine to place this in your apps New constructor
+	'(see below)
 	New Demo
 	Return 0
 End
